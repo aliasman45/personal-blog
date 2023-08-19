@@ -15,5 +15,5 @@ const query = groq`
 export default async function Home() {
   const posts = await client.fetch(query);
 
-  return <BlogList posts={posts} />;
+  return <BlogList key={posts._id} posts={posts} />;
 }
