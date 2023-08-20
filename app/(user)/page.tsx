@@ -3,12 +3,13 @@ import { groq } from "next-sanity";
 import { client } from "@/sanity/lib/client";
 import BlogList from "@/components/BlogList";
 
+export const revalidate = 30; // revalidate at most every 30 seconds
 const query = groq`
 *[_type=='post']{
   ...,
   author->,
   categories[]->,
-  'imageUrl': mainImage.asset->url
+  // 'imageUrl': mainImage.asset->url
 
 } | order(createdAt desc)
 `;

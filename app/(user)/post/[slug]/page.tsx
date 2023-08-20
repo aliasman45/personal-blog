@@ -4,12 +4,25 @@ import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "@/components/RichTextComponents";
 import urlFor from "@/sanity/lib/urlFor";
+
 type Props = {
   params: {
     slug: string;
   };
 };
 
+export const revalidate = 60; // revalidate at most every 60 seconds
+export async function generateStaticParams() {
+  const query = groq`*[_type=='post']{
+    slug
+  }`;
+
+  const slugs: Post[] = await client.fetch(query);
+  const slugsRoutes = slugs.map((slug) => slug.slug.current);
+  return slugsRoutes.map((slug) => ({
+    slug: slug,
+  }));
+}
 async function Post({ params: { slug } }: Props) {
   const query = groq`
     *[_type=='post' && slug.current == $slug][0]

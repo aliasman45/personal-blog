@@ -5,9 +5,6 @@ import urlFor from "@/sanity/lib/urlFor";
 export const RichTextComponents = {
   types: {
     image: ({ value }: any) => {
-      const imagArry = [];
-      imagArry.push(urlFor(value).url());
-      console.log(imagArry);
       return (
         <div className="relative w-full h-96 m-10 mx-auto">
           <Image

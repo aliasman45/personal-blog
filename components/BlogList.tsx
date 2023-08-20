@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 import ClientSideRoute from "./ClientSideRoute";
+import urlFor from "@/sanity/lib/urlFor";
 type Props = {
   posts: Post[];
 };
@@ -16,7 +17,7 @@ function BlogList({ posts }: Props) {
               <div className="relative w-full h-80 drop-shadow-xl group-hover:scale-105 transition-transform duration-200 ease-out">
                 <Image
                   className="object-cover object-left lg:object-center"
-                  src={post.imageUrl}
+                  src={urlFor(post.mainImage).url()}
                   alt={post.author.name}
                   // height={}
                   fill
@@ -33,9 +34,12 @@ function BlogList({ posts }: Props) {
                     </p>
                   </div>
                   <div className="flex flex-col md:flex-row gap-y-2 md:gap-x-2 items-center">
-                    {post.categories?.map((cateogty) => (
-                      <div className="bg-[#F7AB0A] text-center text-black px-3 py-1 rounded-full text-sm font-semibold">
-                        <p>{cateogty.title}</p>
+                    {post.categories?.map((cateogry) => (
+                      <div
+                        key={cateogry._id}
+                        className="bg-[#F7AB0A] text-center text-black px-3 py-1 rounded-full text-sm font-semibold"
+                      >
+                        <p>{cateogry.title}</p>
                       </div>
                     ))}
                   </div>
