@@ -13,6 +13,7 @@ const query = groq`
 
 } | order(createdAt desc)
 `;
+
 export default async function Home() {
   const posts = await client.fetch(query);
 
