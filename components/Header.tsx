@@ -8,11 +8,11 @@ function Header() {
         <Link href="/">Home</Link>
       </div>
       <div>
-        <input
+        {/* <input
           type="search"
           className="outline-none border-2 rounded-md"
           placeholder="search....."
-        />
+        /> */}
       </div>
     </header>
   );
